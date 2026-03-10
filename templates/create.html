@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create question</title>
+</head>
+<body>
+    <form onsubmit="createQuestion(event)">
+        <input id="name" placeholder="Name" required>
+        <input id="q1" placeholder="Option 1" required>
+        <input id="q2" placeholder="Option 2" required>
+        <button type="submit">Post Question</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+</body>
+</html>
