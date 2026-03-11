@@ -22,12 +22,27 @@ function createQuestion(event){
         }
     })
 }
+function genQuestion(){
+    $.ajax({
+        url: "/genQuestion",
+        type: 'GET',
+        success: function(response){
+            currentQuestionId = 999;
+            console.log(response)
+            loadQuestion(response[0],response[1],response[2])
+        },
+        error: function(error){
+            console.log("NEKI KLE NE STIMA")
+        }
+    })
+}
 function getQuestion(){
     $.ajax({
         url: `/getQuestion`,
         type: 'GET',
         success: function(response) {
             currentQuestionId = response['id'];
+            console.log(response)
             loadQuestion(response['name'], response['option1'], response['option2'])
         },
         error: function(error) {
@@ -36,11 +51,23 @@ function getQuestion(){
     })
 }
 function choice1() {
+    if(currentQuestionId==999){
+        genQuestion();
+        q1.disabled = true;
+        q2.disabled = true;
+        return;
+    }
     if(!currentQuestionId) return;
     sendVote('c1');
 }
 
 function choice2() {
+    if(currentQuestionId==999){
+        genQuestion();
+        q1.disabled = true;
+        q2.disabled = true;
+        return;
+    }
     if(!currentQuestionId) return;
     sendVote('c2');
 }
